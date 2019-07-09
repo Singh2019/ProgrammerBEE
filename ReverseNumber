@@ -1,0 +1,47 @@
+
+public class ReversingNumber {
+  public static void main(String [] args) {
+	  ReversingNumber revNumber = new ReversingNumber();
+	  int num1 = revNumber.reverseTheNumber(-00455); // check this special case number passed is wrong
+	  int num2 = revNumber.reverseTheNumber(-45500);
+	  int num3 = revNumber.reverseTheNumber(12345);
+	  int num4 = revNumber.reverseTheNumber(12045);
+	 System.out.println("The generated Reverse String :   " + num1);
+	 System.out.println("The generated Reverse String :   " + num2);
+	 System.out.println("The generated Reverse String :   " + num3);
+	 System.out.println("The generated Reverse String :   " + num4);
+  }
+  
+  
+  private int reverseTheNumber(Number num) {
+	  String intRevStr = "";
+	  String intString = String.valueOf(num);
+	  char [] intCharArr = intString.toCharArray();
+	  for(int i=0; i<intCharArr.length; i++) {
+		  intRevStr = intCharArr[i] + intRevStr;
+	  }
+	  
+	  char [] intRevStrArr = intRevStr.toCharArray();
+	  String finalIntStr = "";
+	  char minusSign = '-';
+	  char zero = '0';
+	  
+	  for(int i= 0; i<intRevStrArr.length; i++) {
+		  if(intRevStrArr[i] == minusSign) {
+			  finalIntStr = minusSign + finalIntStr;
+		  }
+		  else if(intRevStrArr[i] == zero) {
+			  
+			  finalIntStr = ""+finalIntStr;
+		  }
+		  else {
+			  finalIntStr = finalIntStr +intRevStrArr[i];
+		  }
+		  
+	  }
+	  
+	  int reversedNumber = Integer.parseInt(finalIntStr);
+		  
+	  return reversedNumber;
+  }
+}

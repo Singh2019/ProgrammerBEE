@@ -1,0 +1,37 @@
+/*
+ * In an array arrange items in such a way that all '0' comes to the front
+ * [1,4,0,7,0,3] - [0,0.4.7.3] rest elements can be anywhere
+ * second attempt also sort remaining elements. 
+ * */
+public class ZeroFront {
+	static int frontZeroArr [] = new int[7];
+	public static void main( String [] args) {
+		int [] arr = {6,7,0,5,0,0,2};
+		
+		frontZero(arr);
+	}
+
+	private static void frontZero(int[] arr) {
+		int zeroIndex = 0;
+		int lastIndex = arr.length-1;
+		
+		for(int i=0; i<arr.length; i++) {
+			if(arr[i] == 0) {
+				frontZeroArr[zeroIndex] = arr[i];
+				zeroIndex = zeroIndex +1;
+			
+			}
+			else {
+				
+				frontZeroArr[lastIndex] = arr[i];
+				lastIndex = lastIndex -1;
+			}
+			
+			
+		}
+		for(int item : frontZeroArr) {
+			System.out.println(item);
+		}
+	}
+
+}

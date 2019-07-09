@@ -1,0 +1,55 @@
+
+public class ReversingNumber1 {
+  public static void main(String [] args) {
+	  ReversingNumber1 revNumber = new ReversingNumber1();
+	  int num1 = revNumber.reverseTheNumber(-00455); // check this special case number passed is wrong
+	  int num2 = revNumber.reverseTheNumber(-45500);
+	  int num3 = revNumber.reverseTheNumber(12345);
+	  int num4 = revNumber.reverseTheNumber(12045);
+	 System.out.println("The generated Reverse String :   " + num1);
+	 System.out.println("The generated Reverse String :   " + num2);
+	 System.out.println("The generated Reverse String :   " + num3);
+	 System.out.println("The generated Reverse String :   " + num4);
+  }
+  
+  
+  private int reverseTheNumber(int num) {
+	  String intRevStr = "";
+	  String intString = String.valueOf(num);
+	  int index = intString.indexOf("-");
+	  if(index==0) {
+		  intString = intString.replace("-", "");
+	  }
+	
+	  char [] intCharArr = intString.toCharArray();
+	  // we are reversing string here after removing minus sign
+	  for(int i=0; i<intCharArr.length; i++) {
+		  intRevStr = intCharArr[i] + intRevStr;
+	  }
+	  
+	  char [] intRevStrArr = intRevStr.toCharArray();
+	  String finalIntStr = "";
+	  char zero = '0';
+	  //In this loop we are traversing each character of reversed string and removing zero
+	  //if they are in the start (ex- oo455) once any char other than zero comes string length 
+	  //will become greater than 0. and we will no longer deal with zeros.
+	  //if there is no zero in string we will add that character in string.
+	  for(int i= 0; i<intRevStrArr.length; i++) {
+		 if(intRevStrArr[i] == zero && finalIntStr.length() <= 0) {
+			  finalIntStr = ""+finalIntStr;
+		  }
+		  else {
+			  finalIntStr = finalIntStr +intRevStrArr[i];
+		  }
+		  
+	  }
+	  // converting reversed string to integer.
+	  int reversedNumber = Integer.parseInt(finalIntStr);
+	  //checking if integer to be reversed is less than zero. then multiply final string to -1.
+	  if(num < 0) {
+		  reversedNumber = reversedNumber * -1;
+	  }
+		  
+	  return reversedNumber;
+  }
+}

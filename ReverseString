@@ -1,0 +1,32 @@
+public class ReverseString {
+
+	public static void main(String args[]) {
+		reverseTheString ("LATA");
+		reverseTheString ("I Love My India");
+		reverseTheStringWithArray("Shaka Laka Boom Boom");
+	}
+	
+    private static String reverseTheString(String strToBeReversed) {
+    	String reversed = new String();
+    	for(int i=0; i<strToBeReversed.length(); i++) {
+    		reversed = strToBeReversed.charAt(i) + reversed;
+    	}
+    	System.out.println("Reversed String  :"+reversed);
+    	return reversed;
+    }
+    
+    private static String reverseTheStringWithArray(String strToBeReversed) {
+    	String reversed = new String();
+    	char [] charArray = strToBeReversed.toCharArray();
+    	for(int i=0; i<charArray.length; i++) {
+    		reversed = strToBeReversed.charAt(i) + reversed;
+    	}
+    	System.out.println("Reversed String  :"+reversed);
+    	return reversed;
+    }
+    
+    
+//    private static String reverseTheStringWithLambda(String strToBeReversed) {
+//    	//strToBeReversed.chars()
+//    }
+}
