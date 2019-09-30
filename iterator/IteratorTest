@@ -4,7 +4,12 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
+/**
+		 *when you have to remove or add any elemnt in set or list then use Iterator. for each/for loop will throw "Concurrent
+		 ModificationException" . Iterator will also throw "ConcurrentModificationException" if you add/delete any element
+		 in the list without using Iterator.
+		 Code also have performance test for all three loops but its outcome is unpredictable.
+		 * */
 public class IteratorTest {
     public static void main(String [] args) {
     	
