@@ -1,0 +1,132 @@
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+public class IteratorTest {
+    public static void main(String [] args) {
+    	
+    	List<String> playerList = populateList(10);
+    	Set<String> playerSet = populateSet(10);
+    	//#################################################################################//
+    	// Iterator and for each delete/add elements
+    	//#################################################################################//
+    	
+    	//removeAndDeleteElements(playerList);
+    //	removeAndDeleteElements(playerSet);
+    	
+  //  	externalModificationInList(playerList);
+    	//increase zero one by one and see behavior  its unpridectable
+    	int sizeOfList = 100000;
+    	List<String> playerList1 = populateList(sizeOfList);
+    	performanceTestForLoop_forEach_Iterator(playerList1, sizeOfList);
+    	
+    	
+    	
+    	
+    }
+    
+    private static void performanceTestForLoop_forEach_Iterator(List<String> playerList1, int sizeOfList) {
+    	  // Using For Loop
+    	long startTime = System.currentTimeMillis();
+    	List<String> anotherList = new ArrayList<>();
+    	List<String> anotherList1 = new ArrayList<>();
+    	List<String> anotherList2 = new ArrayList<>();
+	   
+	     for (int i=0; i<playerList1.size(); i++) {
+	    	 anotherList.add(playerList1.get(i));
+	     }
+	     long endTime = System.currentTimeMillis();
+	     
+	     long timeTakenByForLoop = endTime - startTime;
+	     System.out.println("Time taken using for Loop "+ timeTakenByForLoop);
+	     System.out.println("Another List Size "+ anotherList.size());
+	     
+	     //using for each loop
+	     
+	     long startTime1 = System.currentTimeMillis();
+		   
+	     for (String el : playerList1) {
+	    	 anotherList1.add(el);
+	     }
+	     long endTime1 = System.currentTimeMillis();
+	     
+	     long timeTakenByForEachLoop = endTime1 - startTime1;
+	     System.out.println("Time Taken by For each "+ timeTakenByForEachLoop);
+	     System.out.println("Another List 2 Size "+ anotherList1.size());
+	     
+        //using Iterator
+	     
+	     long startTime2 = System.currentTimeMillis();
+		 Iterator<String> iterator =  playerList1.iterator(); 
+	     while (iterator.hasNext()) {
+	    	 anotherList2.add(iterator.next());
+	     }
+	     long endTime2 = System.currentTimeMillis();
+	     
+	     long timeTakenByIterator = endTime2 - startTime2;
+	     System.out.println("Time taken using Iterator "+ timeTakenByIterator);
+	     System.out.println("Another List 3 Size "+ anotherList2.size());
+	}
+
+    
+    
+    
+    
+	private static<T> void externalModificationInList(List<T> playerList) {
+    	Iterator<T> listIterator = playerList.iterator();
+		while(listIterator.hasNext()) {
+			T element = listIterator.next();
+			if(element.equals("Player1") ) {
+		//		playerList.add((T) "external Element");	// run one by one means add/remove
+				playerList.remove((T) element);	
+				System.out.println("list size after external modification "+playerList.size());
+			}
+			
+		}
+	}
+
+	private static<T> void removeAndDeleteElements(Collection<T> playerList) {
+		Iterator<T> listIterator = playerList.iterator();
+		while(listIterator.hasNext()) {
+			T element = listIterator.next();
+			if(element.equals("Player1") ) {
+				listIterator.remove();
+			}
+			
+		}
+		
+		for (T el : playerList ) {
+			System.out.println(el);
+		}
+		/**
+		 * Will throw concurrent modification exception. for each works on internal iterator
+		 * which doesn't allow any element to be deleted from collection.
+		 * */
+		for (T el : playerList ) {
+			//System.out.println(el);
+			if(el.equals("Player2") ) {
+				playerList.remove(el);
+			}
+		}
+		
+	}
+
+	private static List<String> populateList(int size) {
+    	List<String> stringList = new ArrayList<>();
+    	for (int i= 0; i<size; i++) {
+    		stringList.add("Player" + i);
+    	}
+    	return stringList;
+    }
+	
+	private static Set<String> populateSet(int size) {
+    	Set<String> stringList = new HashSet<>();
+    	for (int i= 0; i<size; i++) {
+    		stringList.add("Player" + i);
+    	}
+    	return stringList;
+    }
+}
